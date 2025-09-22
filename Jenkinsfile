@@ -49,7 +49,7 @@ pipeline {
                     // Pass IMAGE_TAG to Docker Compose environment variable and run
                     sh """
                     export IMAGE_TAG=${IMAGE_TAG}
-                    docker-compose -f docker-compose.yml up -d
+                    docker compose -f docker-compose.yml up -d
                     """
                 }
             }
