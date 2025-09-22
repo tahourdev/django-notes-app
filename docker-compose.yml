@@ -1,6 +1,7 @@
-version : "3.3"
-services :
-  web :
-     image : keanghor31/note-app:latest
-     ports :
-         - "8000:8000"
+version: "3.3"
+
+services:
+  web:
+    image: "${DOCKERHUB_USER}/note-app:${IMAGE_TAG}"  # Dynamic tag
+    ports:
+      - "8000:8000"
