@@ -1,7 +1,7 @@
 @Library('Shared') _
 
 pipeline {
-    agent { label 'dev-server' }
+    agent { label 'agent-2' }
 
     environment {
         DOCKERHUB_USER = 'keanghor31'
