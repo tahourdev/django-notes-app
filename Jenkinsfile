@@ -14,7 +14,7 @@ pipeline {
             steps {
                 script {
                     sh "whoami"
-                    clone("https://github.com/LondheShubham153/django-notes-app.git", "main")
+                    clone("https://github.com/tahourdev/django-notes-app.git", "dev")
                 }
             }
         }
