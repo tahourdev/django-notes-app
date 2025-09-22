@@ -1,11 +1,11 @@
 @Library('Shared') _
 
 pipeline {
-    agent { label 'agent-2' }
+    agent { label 'dev-server' }
 
     environment {
         DOCKERHUB_USER = 'keanghor31'
-        APP_NAME = 'notes-app'
+        APP_NAME = 'note-app'
         IMAGE_TAG = "v1.0.${BUILD_NUMBER ?: 'latest'}"
     }
 
@@ -14,7 +14,7 @@ pipeline {
             steps {
                 script {
                     sh "whoami"
-                    clone("https://github.com/LondheShubham153/django-notes-app.git", "dev")
+                    clone("https://github.com/LondheShubham153/django-notes-app.git", "main")
                 }
             }
         }
@@ -46,11 +46,11 @@ pipeline {
         stage("Deploy") {
             steps {
                 script {
-                    deploy([
-                        dockerhubUser: DOCKERHUB_USER,
-                        appName: APP_NAME,
-                        tag: IMAGE_TAG
-                    ])
+                    // Pass IMAGE_TAG to Docker Compose environment variable and run
+                    sh """
+                    export IMAGE_TAG=${IMAGE_TAG}
+                    docker-compose -f docker-compose.yml up -d
+                    """
                 }
             }
         }
